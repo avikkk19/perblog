@@ -10,15 +10,15 @@ function Hero() {
         </h1>
 
         <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-          Developer, Tech Enthusiast, OSS Contributor,{" "}
-          <span className="text-blue-500">Gamer</span> and Student. I play,
+          Developer, Tech Enthusiast, OSS Contributor, cowboy fan,{"  "}
+          <span className="text-blue-500">Gamer</span> and Student.<br /> I play,
           read, <span className="text-blue-500">write</span> and
-          <br /> travel for fun.
+           travel for fun.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mb-12">
           <a
-            href="#guestbook"
+            href="/signbook"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors"
           >
             Sign my guestbook

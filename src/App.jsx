@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Achievements from "./components/Achievements";
 import Projects from "./components/Projects";
 import SignBook from "./components/SignBook";
+import Photography from "./components/Photography";
 import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 
@@ -30,6 +31,25 @@ function App() {
             element={
               <main className="md:ml-54 p-4">
                 <SignBook />
+                <Footer />
+              </main>
+            }
+          />
+          <Route
+            path="/projects"
+            element={
+              <main className="md:ml-54 p-4">
+                <Projects />
+                <Footer />
+              </main>
+            }
+          />
+          
+          <Route
+            path="/photography"
+            element={
+              <main className="md:ml-54 p-4">
+                <Photography />
                 <Footer />
               </main>
             }

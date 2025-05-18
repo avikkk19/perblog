@@ -9,8 +9,8 @@ const ProjectCard = ({ title, description, imageUrl, link }) => {
       rel="noopener noreferrer"
       className="group relative overflow-hidden rounded-xl bg-gray-900/5 dark:bg-gray-900/30 hover:bg-gray-900/10 dark:hover:bg-gray-900/40 transition-all duration-300 w-80"
     >
-      <div className="p-4 flex flex-col h-full bg-gray-800 opacity-90 w-80 rounded-xl">
-        <div className="w-12 h-12 bg-gray-900 dark:bg-gray-700 rounded-full flex items-center justify-center mb-2">
+      <div className="p-4 flex flex-col h-full dark:bg-gray-800 bg-gray-200 opacity-90 w-80 rounded-xl">
+        <div className="w-12 h-12  dark:bg-gray-700 bg-gray-200 rounded-full flex items-center justify-center mb-2">
           <img
             src={imageUrl}
             alt={title}
@@ -121,7 +121,7 @@ const Projects = () => {
     <section className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-5xl mx-auto px-4 md:mx-12">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">
-          Latest projects
+          Latest <span className="text-green-500 ">projects.</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-y-4 mr-[320px]">
           {projectsWithUrls.map((project, index) => (

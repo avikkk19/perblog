@@ -11,9 +11,15 @@ const SignBook = () => {
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [lastSubmission, setLastSubmission] = useState(null);
 
   useEffect(() => {
     fetchEntries();
+    // Get last submission timestamp from localStorage
+    const lastSubmit = localStorage.getItem("lastSubmission");
+    if (lastSubmit) {
+      setLastSubmission(parseInt(lastSubmit));
+    }
   }, []);
 
   const fetchEntries = async () => {
@@ -45,6 +51,48 @@ const SignBook = () => {
     });
   };
 
+  const validateContent = (text) => {
+    // Check for suspicious patterns (spam keywords, excessive URLs, etc.)
+    const spamPatterns = [
+      /\b(casino|viagra|forex|crypto|buy now|click here)\b/i,
+      /(https?:\/\/[^\s]+){3,}/, // More than 2 URLs
+      /\b([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}){2,}/, // Multiple emails
+    ];
+
+    return !spamPatterns.some((pattern) => pattern.test(text));
+  };
+
+  const checkRateLimit = () => {
+    const now = Date.now();
+    // Limit to one submission every 5 minutes (300000 ms)
+    if (lastSubmission && now - lastSubmission < 300000) {
+      return false;
+    }
+    return true;
+  };
+
+  const checkDuplicate = async (name, suggestion) => {
+    try {
+      // Check for identical entries in the last 24 hours
+      const twentyFourHoursAgo = new Date();
+      twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+
+      const { data, error } = await supabase
+        .from("visitor_signbook")
+        .select("*")
+        .eq("name", name)
+        .eq("suggestion", suggestion)
+        .gte("created_at", twentyFourHoursAgo.toISOString());
+
+      if (error) throw error;
+
+      return data && data.length > 0;
+    } catch (err) {
+      console.error("Error checking for duplicates:", err);
+      return false; // In case of error, proceed with caution
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -53,9 +101,37 @@ const SignBook = () => {
       return;
     }
 
+    // Content validation
+    if (!validateContent(formData.suggestion)) {
+      setError(
+        "Your message was flagged as potential spam. Please revise your content."
+      );
+      return;
+    }
+
+    // Rate limiting
+    if (!checkRateLimit()) {
+      setError("Please wait at least 5 minutes between submissions.");
+      return;
+    }
+
     try {
       setSubmitting(true);
       setError(null);
+
+      // Check for duplicate entries
+      const isDuplicate = await checkDuplicate(
+        formData.name.trim(),
+        formData.suggestion.trim()
+      );
+
+      if (isDuplicate) {
+        setError(
+          "A similar entry was recently submitted. Please wait before submitting again."
+        );
+        setSubmitting(false);
+        return;
+      }
 
       const { error } = await supabase.from("visitor_signbook").insert([
         {
@@ -67,6 +143,11 @@ const SignBook = () => {
       if (error) {
         throw error;
       }
+
+      // Store submission timestamp
+      const now = Date.now();
+      localStorage.setItem("lastSubmission", now.toString());
+      setLastSubmission(now);
 
       // Reset form and show success message
       setFormData({ name: "", suggestion: "" });
@@ -88,14 +169,25 @@ const SignBook = () => {
   };
 
   return (
-    <section className="py-16 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-4xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
-          Sign the Guestbook
+    <section
+      className="py-16 relative"
+      style={{
+        backgroundImage: "url('/fivicon2.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black opacity-75"></div>
+
+      <div className="max-w-4xl mx-auto px-4 relative z-10">
+        <h2 className="text-3xl font-bold text-white mb-8">
+          Sign the <span className="text-green-500">Guestbook.</span>
         </h2>
 
         {/* Form */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-10">
+        <div className="bg-white dark:bg-gray-800 bg-opacity-90 dark:bg-opacity-90 rounded-xl shadow-md p-6 mb-10 backdrop-blur-sm">
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
@@ -187,7 +279,7 @@ const SignBook = () => {
 
         {/* Entries */}
         <div>
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+          <h3 className="text-xl font-semibold text-white mb-4">
             Recent Entries
           </h3>
 
@@ -215,7 +307,7 @@ const SignBook = () => {
               </svg>
             </div>
           ) : entries.length === 0 ? (
-            <div className="py-10 text-center text-gray-600 dark:text-gray-400">
+            <div className="py-10 text-center text-white">
               No entries yet. Be the first to sign the guestbook!
             </div>
           ) : (
@@ -223,7 +315,7 @@ const SignBook = () => {
               {entries.map((entry) => (
                 <div
                   key={entry.id}
-                  className="bg-white dark:bg-gray-800 rounded-lg p-5 shadow-sm border border-gray-100 dark:border-gray-700"
+                  className="bg-white dark:bg-gray-800 bg-opacity-90 dark:bg-opacity-90 rounded-lg p-5 shadow-sm border border-gray-100 dark:border-gray-700 backdrop-blur-sm"
                 >
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-medium text-gray-900 dark:text-white">
