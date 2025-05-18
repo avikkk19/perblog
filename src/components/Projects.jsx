@@ -1,131 +1,102 @@
 import React from "react";
 import { supabase } from "../lib/supabase";
 
-const ProjectCard = ({ title, description, stack, imageUrl, link }) => {
+const ProjectCard = ({ title, description, imageUrl, link }) => {
   return (
-    <div className="group relative overflow-hidden rounded-xl bg-gray-900/5 dark:bg-gray-900/30 hover:bg-gray-900/10 dark:hover:bg-gray-900/40 transition-all duration-300">
-      <div className="aspect-[4/3] relative">
-        <img
-          src={imageUrl}
-          alt={title}
-          className="object-cover w-full h-full rounded-xl"
-          loading="lazy"
-          onError={(e) => {
-            console.error("Image failed to load:", e.target.src);
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 rounded-xl" />
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
-          <p className="text-sm text-white/80 mb-2 line-clamp-2">
-            {description}
-          </p>
-          <div className="flex flex-wrap gap-2 mb-3">
-            {stack.split(",").map((tech, i) => (
-              <span
-                key={i}
-                className="text-xs px-2 py-1 bg-white/20 text-white rounded-full"
-              >
-                {tech.trim()}
-              </span>
-            ))}
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative overflow-hidden rounded-xl bg-gray-900/5 dark:bg-gray-900/30 hover:bg-gray-900/10 dark:hover:bg-gray-900/40 transition-all duration-300 w-80"
+    >
+      <div className="p-4 flex flex-col h-full bg-gray-800 opacity-90 w-80 rounded-xl">
+        <div className="w-12 h-12 bg-gray-900 dark:bg-gray-700 rounded-full flex items-center justify-center mb-2">
+          <img
+            src={imageUrl}
+            alt={title}
+            className="w-8 h-8 object-contain rounded-full "
+            loading="lazy"
+            onError={(e) => {
+              console.error("Image failed to load:", e.target.src);
+              // Set a fallback icon based on first letter
+              e.target.onerror = null;
+              e.target.src =
+                "https://dhravya.dev/_next/image?url=https%3A%2F%2Fi.dhr.wtf%2Fr%2Fsupermemory.png&w=96&q=75";
+            }}
+          />
+        </div>
+
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+          {title}
+        </h3>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+          {description}
+        </p>
+
+        <div className="self-end">
+          <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
+            <svg
+              className="w-4 h-4 text-gray-700 dark:text-gray-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
           </div>
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center"
-          >
-            <div className="h-8 w-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-              <svg
-                className="w-4 h-4 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </div>
-          </a>
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 
 const Projects = () => {
   const projects = [
+    // add more later
     {
-      title: "Supermemory",
+      title: "CardioGuard",
       description:
-        "AI second brain for your team. Supermemory is a tool that helps you capture, organize, and retrieve information from your team's conversations and documents.",
-      stack: "React, Node.js, OpenAI",
-      imagePath: "projects/supermemory.jpg",
-      link: "https://supermemory.com",
+        "AI-powered cardiac health monitoring and alert system that detects early signs of cardiac arrest using real-time sensor data and machine learning, instantly notifying emergency contacts.",
+      imagePath: "placeholder", // No image available
+      link: "https://github.com/5mokshith/CardioGuard",
     },
     {
-      title: "Supermemory DB",
+      title: "Trefloo-Landing",
       description:
-        "Vector database I made for Supermemory. Fully serverless and infinitely scalable by using Cloudflare R2 and Durable objects.",
-      stack: "Cloudflare, R2, Durable Objects",
-      imagePath: "projects/supermemorydb.jpg",
-      link: "https://db.supermemory.com",
-    },
-    {
-      title: "Markdowner",
-      description:
-        "Converts websites to LLM-ready markdown data. I built this to help me with Supermemory.",
-      stack: "Node.js, Puppeteer",
-      imagePath: "projects/markdowner.jpg",
-      link: "https://markdowner.dev",
-    },
-    {
-      title: "Discord Bot to Portfolio",
-      description:
-        "A discord bot that creates a website for yours as you talk to it.",
-      stack: "Discord.js, Next.js",
-      imagePath: "projects/discordbot.jpg",
-      link: "https://discord-portfolio.dev",
-    },
-    {
-      title: "Radish",
-      description:
-        "Super fast drop-in replacement of the in memory key-value store Redis, made in Golang",
-      stack: "Golang",
-      imagePath: "projects/radish.jpg",
-      link: "https://github.com/radish",
-    },
-    {
-      title: "Lecture Chat",
-      description:
-        "A virtual TA that listens to the lecture and answers your doubts in real time.",
-      stack: "Next.js, Whisper API",
-      imagePath: "projects/lecturechat.jpg",
-      link: "https://lecturechat.ai",
+        "Trefloo is a travel-tech platform that curates personalized, culture-rich journeys using AI and local insights. Discover hidden destinations, connect with local hosts, and experience travel beyond the ordinary.",
+      imagePath: "placeholder", // No image available
+      link: "https://github.com/5mokshith/Trefloo-Landing",
     },
     {
       title: "Crecon",
       description:
         "This is my personal project, which I've been working on. It's a creators, editors, graphic designers etc other gig finders or work searchers support platform with realtime chats, blogs.",
-      stack: "MERN stack",
-      imagePath: "projects/crecon.jpg",
-      link: "https://crecon.dev",
+      imagePath: "projects/crecon-icon.jpg",
+      link: "https://crecon.vercel.app",
     },
     {
       title: "DrunkDragon",
       description: "A web app purely about Formula 1.",
-      stack: "React, Tailwind, Supabase",
-      imagePath: "projects/drunkdragon.jpg",
-      link: "https://drunkdragon.com",
+      imagePath: "projects/drunkdragon-icon.jpg",
+      link: "https://drunkdragon.vercel.app",
     },
   ];
 
   const projectsWithUrls = projects.map((project) => {
+    // For placeholder images, generate a fallback
+    if (project.imagePath === "placeholder") {
+      return {
+        ...project,
+        imageUrl:
+          "https://dhravya.dev/_next/image?url=https%3A%2F%2Fi.dhr.wtf%2Fr%2Fsupermemory.png&w=96&q=75",
+      };
+    }
+
     // Try to get the public URL from Supabase Storage
     try {
       const { data } = supabase.storage
@@ -137,30 +108,27 @@ const Projects = () => {
       };
     } catch (error) {
       console.error(`Error getting URL for ${project.title}:`, error);
-      // Fallback to a placeholder image
+      // Fallback to a placeholder image with first letter
       return {
         ...project,
-        imageUrl: "https://via.placeholder.com/400x300?text=Project+Image",
+        imageUrl:
+          "https://dhravya.dev/_next/image?url=https%3A%2F%2Fi.dhr.wtf%2Fr%2Fsupermemory.png&w=96&q=75",
       };
     }
   });
 
   return (
-    <section className="py-20">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-          Latest Projects
+    <section className="py-20 bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-5xl mx-auto px-4 md:mx-12">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">
+          Latest projects
         </h2>
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-12">
-          Here are a few of the projects I've been working on
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-y-4 mr-[320px]">
           {projectsWithUrls.map((project, index) => (
             <ProjectCard
               key={index}
               title={project.title}
               description={project.description}
-              stack={project.stack}
               imageUrl={project.imageUrl}
               link={project.link}
             />

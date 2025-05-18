@@ -2,7 +2,7 @@ import React from "react";
 
 function Hero() {
   return (
-    <div className="py-20">
+    <div className="py-20 md:ml-20 ml-4 relative">
       <div className="max-w-3xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
           I make <span className="text-green-500 bg-zinc-900">full-stack</span>{" "}
@@ -19,15 +19,15 @@ function Hero() {
         <div className="flex flex-col sm:flex-row gap-4 mb-12">
           <a
             href="#guestbook"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors"
           >
             Sign my guestbook
           </a>
           <a
-            href="mailto:contact@example.com"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            href="mailto:avinashkamadri67@gmail.com"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
-            Send an email →
+            Send an private email →
           </a>
         </div>
 
@@ -54,7 +54,7 @@ function Hero() {
             </svg>
           </a>
           <a
-            href="https://linkedin.com/in/yourusername"
+            href="//https://www.linkedin.com/in/avinash-kamadri-28246935a/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
@@ -64,7 +64,7 @@ function Hero() {
             </svg>
           </a>
           <a
-            href="https://discord.com/users/yourusername"
+            href="https://discord.com/users/SixTusop"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
@@ -74,7 +74,7 @@ function Hero() {
             </svg>
           </a>
           <a
-            href="mailto:your.email@example.com"
+            href="mailto:your.avinashkamadri67@gmail.com"
             className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
           >
             <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">

@@ -13,7 +13,7 @@ const AchievementCard = ({ title, imageUrl, link }) => {
         <img
           src={imageUrl}
           alt={title}
-          className="object-cover w-full h-full rounded-xl"
+          className="object-cover w-full h-full rounded-xl opacity-70"
           loading="lazy"
           onError={(e) => {
             console.error("Image failed to load:", e.target.src);
@@ -57,12 +57,12 @@ const Achievements = () => {
     try {
       const achievementsData = [
         {
-          title: "Guerrilla",
+          title: "HACKSAVY 25 finalists",
           imagePath: "gurrilla450.jpg",
           link: "/",
         },
         {
-          title: "Porsche Panamera",
+          title: "JITS UTSAV runner up",
           imagePath: "porsche panamera turbo.jpg",
           link: "/",
         },

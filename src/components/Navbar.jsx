@@ -21,8 +21,8 @@ function Navbar() {
           }`}
           href="/"
         >
-          <p className="text-gray-900 dark:text-white text-xl font-bold">
-            AVI
+          <p className="text-gray-900 dark:text-white text-xs font-medium">
+            Avinash
           </p>
         </a>
 
@@ -81,14 +81,14 @@ function Navbar() {
           </a>
 
           <a
-            href="/blog"
+            href="/signbook"
             className={`text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300 p-2 hover:bg-gray-100 dark:hover:bg-gray-800/40 rounded-full flex items-center justify-center ${
               pageLoaded
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 translate-x-4"
             }`}
             style={{ transitionDelay: "300ms" }}
-            title="Blog"
+            title="Guest Book"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
               />
             </svg>
           </a>
@@ -196,8 +196,9 @@ function Navbar() {
             </svg>
           </a>
           <a
-            href="/blog"
+            href="/signbook"
             className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white p-2"
+            aria-label="Guest Book"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -210,7 +211,7 @@ function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
               />
             </svg>
           </a>
