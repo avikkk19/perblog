@@ -2,14 +2,15 @@ import React from "react";
 import { ThemeProvider } from "./context/ThemeContext";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
-
+import Achievements from "./components/Achievements";
 function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-white dark:bg-[rgb(15,23,42)] transition-colors duration-200">
-        <Navbar />
+        <Navbar /> 
         <main className="md:ml-54 p-4">
           <Hero />
+          <Achievements />
         </main>
       </div>
     </ThemeProvider>
