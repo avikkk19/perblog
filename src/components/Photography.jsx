@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-// Initialize Supabase client with your URL
+// Initialize Supabase client
 const supabaseUrl = "https://ldhrauogmxyxtqmeccgs.supabase.co";
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY; // Make sure this is in your .env file
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Photography = () => {
@@ -16,69 +16,56 @@ const Photography = () => {
   const [uploadingFiles, setUploadingFiles] = useState([]);
   const [uploadProgress, setUploadProgress] = useState({});
   const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   useEffect(() => {
     fetchPhotos();
-  }, []);
+  }, [refreshTrigger]);
 
   const fetchPhotos = async () => {
     try {
       setLoading(true);
+      setError(null);
 
-      // List all files in the 'photography' folder within the 'images' bucket
+      // List files in the 'photography' folder inside 'images' bucket
       const { data, error } = await supabase.storage
         .from("images")
-        .list("photography");
-
-      if (error) {
-        throw error;
-      }
-
-      if (data && data.length > 0) {
-        // Filter out any potential folders and only keep files
-        const imageFiles = data.filter((file) => !file.id.endsWith("/"));
-
-        // Create the full public URLs for each image
-        const photoUrls = imageFiles.map((file) => {
-          const publicUrl = supabase.storage
-            .from("images")
-            .getPublicUrl(`photography/${file.name}`).data.publicUrl;
-
-          return {
-            url: publicUrl,
-            id: file.id, // Keep ID only for React key prop
-          };
+        .list("photography", {
+          limit: 100,
+          offset: 0,
+          sortBy: { column: "name", order: "asc" },
         });
 
-        setPhotos(photoUrls);
-      } else {
-        console.log("No files found in photography folder");
+      if (error) throw error;
 
-        // Use fallback images from the console logs
-        const fallbackUrls = [
-          {
-            url: "https://ldhrauogmxyxtqmeccgs.supabase.co/storage/v1/object/public/images/photography/cover1.jpg",
-            id: "cover1",
-          },
-          {
-            url: "https://ldhrauogmxyxtqmeccgs.supabase.co/storage/v1/object/public/images/photography/fivicon2.jpg",
-            id: "fivicon2",
-          },
-          {
-            url: "https://ldhrauogmxyxtqmeccgs.supabase.co/storage/v1/object/public/images/photography/gurrilla450.jpg",
-            id: "gurrilla450",
-          },
-          {
-            url: "https://ldhrauogmxyxtqmeccgs.supabase.co/storage/v1/object/public/images/photography/porsche%20panamera%20turbo.jpg",
-            id: "porsche",
-          },
-        ];
-
-        setPhotos(fallbackUrls);
+      if (!data || data.length === 0) {
+        setPhotos([]);
+        setLoading(false);
+        return;
       }
+
+      // Filter only image files
+      const imageFiles = data.filter((file) =>
+        /\.(jpe?g|png|gif|webp|svg)$/i.test(file.name)
+      );
+
+      // Generate public URLs for each image
+      const photosWithUrls = imageFiles.map((file) => {
+        const { data } = supabase.storage
+          .from("images")
+          .getPublicUrl(`photography/${file.name}`);
+
+        return {
+          id: file.id || file.name,
+          name: file.name.replace(/\.[^/.]+$/, "").replace(/_/g, " "),
+          url: data.publicUrl,
+        };
+      });
+
+      console.log("Generated URLs:", photosWithUrls); // Debug log
+      setPhotos(photosWithUrls);
     } catch (err) {
-      console.error("Error fetching photos:", err);
-      setError(err.message);
+      setError(err.message || "Failed to fetch images");
     } finally {
       setLoading(false);
     }
@@ -89,6 +76,7 @@ const Photography = () => {
     if (password === "avinash@6871") {
       setIsUploaderOpen(true);
       setPasswordError("");
+      document.getElementById("password-modal").close();
     } else {
       setPasswordError("Invalid password");
       setTimeout(() => setPasswordError(""), 3000);
@@ -107,15 +95,13 @@ const Photography = () => {
 
     const uploads = uploadingFiles.map(async (file) => {
       try {
-        // Create a unique file name to avoid overwriting
         const fileExt = file.name.split(".").pop();
         const fileName = `${Date.now()}_${Math.random()
           .toString(36)
           .substring(2, 15)}.${fileExt}`;
         const filePath = `photography/${fileName}`;
 
-        // Upload the file
-        const { error: uploadError, data } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from("images")
           .upload(filePath, file, {
             cacheControl: "3600",
@@ -131,13 +117,9 @@ const Photography = () => {
             },
           });
 
-        if (uploadError) {
-          throw uploadError;
-        }
-
-        return { success: true, fileName };
+        if (uploadError) throw uploadError;
+        return { success: true, fileName, path: filePath };
       } catch (err) {
-        console.error(`Error uploading ${file.name}:`, err);
         return { success: false, fileName: file.name, error: err.message };
       }
     });
@@ -148,52 +130,71 @@ const Photography = () => {
     if (allSuccessful) {
       setUploadSuccess(true);
       setUploadingFiles([]);
-      // Refresh the photo list
-      fetchPhotos();
+      setTimeout(() => {
+        setRefreshTrigger((prev) => prev + 1);
+      }, 1000);
     }
   };
 
-  if (loading) {
+  if (loading)
     return (
-      <div className="flex justify-center items-center h-64">Loading...</div>
+      <div className="flex justify-center items-center h-64">
+        Loading photos...
+      </div>
     );
-  }
 
-  if (error) {
-    return <div className="text-red-500 text-center">Error loading images</div>;
-  }
+  if (error)
+    return (
+      <div className="text-center text-red-600 font-semibold">{error}</div>
+    );
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold text-white mb-2">
-        My <span className="text-green-500">Photography.</span>
+      <h2 className="text-3xl font-bold text-zinc-900 dark:text-white mb-2">
+        My <span className="text-green-500">Photography, </span>
       </h2>
-      <h2 className="text-xl font-bold text-white mb-8 ml-4">
+      <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-8 ml-4">
         and <span className="text-green-500">the images i admire.</span>
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {photos.map((photo) => (
-          <div
-            key={photo.id}
-            className="overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
-          >
-            <div className="relative pb-[66.25%]">
-              <img
-                src={photo.url}
-                alt="Photography"
-                className="absolute h-full w-full object-cover"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.src =
-                    "https://via.placeholder.com/600x400?text=Image+Not+Found";
-                }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
 
-      {/* Hidden uploader button */}
+      {photos.length === 0 ? (
+        <div className="text-center py-10">
+          <p className="text-gray-400">
+            No images found. Upload some photos to get started.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {photos.map((photo) => (
+            <div
+              key={photo.id}
+              className="overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
+            >
+              <div className="relative pb-[66.25%]">
+                <img
+                  src={photo.url}
+                  alt={photo.name || "Photography"}
+                  className="absolute h-full w-full object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.target.src =
+                      "https://via.placeholder.com/600x400?text=Image+Not+Found";
+                  }}
+                />
+              </div>
+              {photo.name && (
+                <div className="p-2 bg-gray-800 bg-opacity-80">
+                  <p className="text-sm text-gray-300 text-center">
+                    {photo.name}
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Admin Upload Section */}
       <div className="mt-16 flex justify-center">
         {!isUploaderOpen ? (
           <div className="text-center">
@@ -271,8 +272,10 @@ const Photography = () => {
               <div className="space-y-2 mb-4">
                 {uploadingFiles.map((file, index) => (
                   <div key={index} className="flex items-center">
-                    <div className="flex-1 truncate">{file.name}</div>
-                    <div className="w-16 text-right">
+                    <div className="flex-1 truncate text-white">
+                      {file.name}
+                    </div>
+                    <div className="w-16 text-right text-white">
                       {uploadProgress[file.name]
                         ? `${uploadProgress[file.name]}%`
                         : "0%"}
