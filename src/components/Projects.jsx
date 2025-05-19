@@ -1,5 +1,6 @@
 import React from "react";
 import { supabase } from "../lib/supabase";
+import projectsIcon from "../../public/projects.png";
 
 const ProjectCard = ({ title, description, imageUrl, link }) => {
   return (
@@ -18,10 +19,8 @@ const ProjectCard = ({ title, description, imageUrl, link }) => {
             loading="lazy"
             onError={(e) => {
               console.error("Image failed to load:", e.target.src);
-              // Set a fallback icon based on first letter
               e.target.onerror = null;
-              e.target.src =
-                "https://dhravya.dev/_next/image?url=https%3A%2F%2Fi.dhr.wtf%2Fr%2Fsupermemory.png&w=96&q=75";
+              e.target.src = projectsIcon;
             }}
           />
         </div>
@@ -57,19 +56,18 @@ const ProjectCard = ({ title, description, imageUrl, link }) => {
 
 const Projects = () => {
   const projects = [
-    // add more later
     {
       title: "CardioGuard",
       description:
         "AI-powered cardiac health monitoring and alert system that detects early signs of cardiac arrest using real-time sensor data and machine learning, instantly notifying emergency contacts.",
-      imagePath: "placeholder", // No image available
+      imagePath: "projects/cardioguard-icon.jpg",
       link: "https://github.com/5mokshith/CardioGuard",
     },
     {
       title: "Trefloo-Landing",
       description:
         "Trefloo is a travel-tech platform that curates personalized, culture-rich journeys using AI and local insights. Discover hidden destinations, connect with local hosts, and experience travel beyond the ordinary.",
-      imagePath: "placeholder", // No image available
+      imagePath: "projects/trefloo-icon.jpg",
       link: "https://github.com/5mokshith/Trefloo-Landing",
     },
     {
@@ -88,16 +86,6 @@ const Projects = () => {
   ];
 
   const projectsWithUrls = projects.map((project) => {
-    // For placeholder images, generate a fallback
-    if (project.imagePath === "placeholder") {
-      return {
-        ...project,
-        imageUrl:
-          "https://dhravya.dev/_next/image?url=https%3A%2F%2Fi.dhr.wtf%2Fr%2Fsupermemory.png&w=96&q=75",
-      };
-    }
-
-    // Try to get the public URL from Supabase Storage
     try {
       const { data } = supabase.storage
         .from("images")
@@ -108,11 +96,9 @@ const Projects = () => {
       };
     } catch (error) {
       console.error(`Error getting URL for ${project.title}:`, error);
-      // Fallback to a placeholder image with first letter
       return {
         ...project,
-        imageUrl:
-          "https://dhravya.dev/_next/image?url=https%3A%2F%2Fi.dhr.wtf%2Fr%2Fsupermemory.png&w=96&q=75",
+        imageUrl: projectsIcon,
       };
     }
   });
