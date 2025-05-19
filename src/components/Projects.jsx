@@ -2,66 +2,93 @@ import React from "react";
 import { supabase } from "../lib/supabase";
 import projectsIcon from "../../public/projects.png";
 
-const ProjectCard = ({ title, description, imageUrl, link }) => {
+const ProjectCard = ({ title, description, imageUrl, link, liveLink }) => {
   return (
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative overflow-hidden rounded-xl bg-gray-900/5 dark:bg-gray-900/30 hover:bg-gray-900/10 dark:hover:bg-gray-900/40 transition-all duration-300 w-80"
-    >
-      <div className="p-4 flex flex-col h-full dark:bg-gray-800 bg-gray-200 opacity-90 w-80 rounded-xl">
-        <div className="w-12 h-12  dark:bg-gray-700 bg-gray-200 rounded-full flex items-center justify-center mb-2">
-          <img
-            src={imageUrl}
-            alt={title}
-            className="w-8 h-8 object-contain rounded-full "
-            loading="lazy"
-            onError={(e) => {
-              console.error("Image failed to load:", e.target.src);
-              e.target.onerror = null;
-              e.target.src = projectsIcon;
-            }}
-          />
-        </div>
+    <div className="group relative overflow-hidden rounded-xl bg-gray-900/5 dark:bg-gray-900/30 hover:bg-gray-900/10 dark:hover:bg-gray-900/40 transition-all duration-300 w-80">
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block h-full"
+      >
+        <div className="p-4 flex flex-col h-full dark:bg-gray-800 bg-gray-200 opacity-90 w-80 rounded-xl">
+          <div className="w-12 h-12 dark:bg-gray-700 bg-gray-200 rounded-full flex items-center justify-center mb-2">
+            <img
+              src={imageUrl}
+              alt={title}
+              className="w-8 h-8 object-contain rounded-full"
+              loading="lazy"
+              onError={(e) => {
+                console.error("Image failed to load:", e.target.src);
+                e.target.onerror = null;
+                e.target.src = projectsIcon;
+              }}
+            />
+          </div>
 
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-          {title}
-        </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-grow">
-          {description}
-        </p>
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+            {title}
+          </h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+            {description}
+          </p>
 
-        <div className="self-end">
-          <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-            <svg
-              className="w-4 h-4 text-gray-700 dark:text-gray-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div className="flex justify-between items-center">
+            <a
+              href={liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-green-400 dark:text-green-500  transition-colors  bg-zinc-800 dark:bg-gray-700 rounded-md px-2 py-1"
+              onClick={(e) => e.stopPropagation()}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
+              View Live Website
+            </a>
+            <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center group-hover:bg-gray-300 dark:group-hover:bg-gray-700 transition-colors duration-200">
+              <svg
+                className="w-4 h-4 text-gray-700 dark:text-gray-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
   );
 };
 
 const Projects = () => {
   const projects = [
     {
+      title: "Crecon",
+      description:
+        "This is my personal project, which I've been working on. It's a creators, editors, graphic designers etc other gig finders or work searchers support platform with realtime chats, blogs.",
+      imagePath: "projects/crecon-icon.jpg",
+      link: "https://github.com/avikkk19/crecon",
+      liveLink: "https://crecon.vercel.app",
+    },
+    {
+      title: "DrunkDragon",
+      description: "A web app purely about Formula 1.",
+      imagePath: "projects/drunkdragon-icon.jpg",
+      link: "https://github.com/avikkk19/DrunkDragon",
+      liveLink: "https://drunkdragon33.vercel.app",
+    },
+    {
       title: "CardioGuard",
       description:
         "AI-powered cardiac health monitoring and alert system that detects early signs of cardiac arrest using real-time sensor data and machine learning, instantly notifying emergency contacts.",
       imagePath: "projects/cardioguard-icon.jpg",
       link: "https://github.com/5mokshith/CardioGuard",
+      liveLink: "https://cardio-guard-landing-page-ggqpsmfv0-mokshiths-projects-8dc2221a.vercel.app",
     },
     {
       title: "Trefloo-Landing",
@@ -69,19 +96,7 @@ const Projects = () => {
         "Trefloo is a travel-tech platform that curates personalized, culture-rich journeys using AI and local insights. Discover hidden destinations, connect with local hosts, and experience travel beyond the ordinary.",
       imagePath: "projects/trefloo-icon.jpg",
       link: "https://github.com/5mokshith/Trefloo-Landing",
-    },
-    {
-      title: "Crecon",
-      description:
-        "This is my personal project, which I've been working on. It's a creators, editors, graphic designers etc other gig finders or work searchers support platform with realtime chats, blogs.",
-      imagePath: "projects/crecon-icon.jpg",
-      link: "https://crecon.vercel.app",
-    },
-    {
-      title: "DrunkDragon",
-      description: "A web app purely about Formula 1.",
-      imagePath: "projects/drunkdragon-icon.jpg",
-      link: "https://drunkdragon.vercel.app",
+      liveLink: "https://trefloo.vercel.app",
     },
   ];
 
@@ -117,6 +132,7 @@ const Projects = () => {
               description={project.description}
               imageUrl={project.imageUrl}
               link={project.link}
+              liveLink={project.liveLink}
             />
           ))}
         </div>
