@@ -17,6 +17,7 @@ function Footer() {
             </a>
             . All rights reserved.
           </p>
+          <p className="dark:text-white text-sm text-black">Thank you for visiting!</p>
         </div>
         <div className="flex space-x-4">
           <a

@@ -4,16 +4,20 @@ function Hero() {
   return (
     <div className="py-20 md:ml-20 ml-4 relative">
       <div className="max-w-3xl">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white capitalize">
+          I'm{" "}
+          <span className="text-amber-500 hover:text-amber-600 cursor-alias">
+            Avinash, {""}
+          </span>
           I make <span className="text-green-500 bg-zinc-900">full-stack</span>{" "}
           products that I <span className="text-pink-500">love.</span>
         </h1>
 
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-          Developer, Tech Enthusiast, OSS Contributor, cowboy fan,{"  "}
-          <span className="text-blue-500">Gamer</span> and Student.<br /> I play,
-          read, <span className="text-blue-500">write</span> and
-           travel for fun.
+        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 capitalize">
+          Developer, Tech Enthusiast, OSS Contributor, Cowboy fan,{"  "}
+          <span className="text-blue-500">Gamer</span> and Student.
+          <br /> I play, read, <span className="text-blue-500">write</span> and
+          travel for fun.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -74,7 +78,7 @@ function Hero() {
             </svg>
           </a>
           <a
-            href="mailto:your.avinashkamadri67@gmail.com"
+            href="mailto:avinashkamadri67@gmail.com"
             className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
           >
             <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">

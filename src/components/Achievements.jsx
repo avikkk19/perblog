@@ -58,13 +58,13 @@ const Achievements = () => {
       const achievementsData = [
         {
           title: "HACKSAVY 25 finalists",
-          imagePath: "gurrilla450.jpg",
-          link: "/",
+          imagePath: "big4-1.jpg",
+          link: "",
         },
         {
           title: "JITS UTSAV runner up",
-          imagePath: "porsche panamera turbo.jpg",
-          link: "/",
+          imagePath: "big4-2.jpg",
+          link: "",
         },
         // add more achievements here latwr
       ];
