@@ -19,7 +19,7 @@ const ProjectCard = ({ title, description, imageUrl, link, liveLink }) => {
               className="w-8 h-8 object-contain rounded-full"
               loading="lazy"
               onError={(e) => {
-                console.error("Image failed to load:", e.target.src);
+                // console.error("Image failed to load:", e.target.src);
                 e.target.onerror = null;
                 e.target.src = projectsIcon;
               }}
