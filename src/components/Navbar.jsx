@@ -16,7 +16,7 @@ function Navbar() {
       <nav className="bg-white dark:bg-[rgb(15,23,42)] shadow-md backdrop-blur-3xl py-4 fixed left-0 top-0 bottom-0 h-full z-50 w-54 flex-col hidden md:flex items-end border-r border-gray-200 dark:border-gray-800/50">
         {/* Logo */}
         <a
-          className={`flex items-center justify-end w-full pr-4 mb-10 transition-opacity duration-500 ease-in-out ${
+          className={`flex items-center justify-end w-full pr-4 mb-10 transition-opacity duration-500 ease-in-out  ${
             pageLoaded ? "opacity-100" : "opacity-0"
           }`}
           href="/"
@@ -24,7 +24,7 @@ function Navbar() {
           {/* <p className="text-gray-900 dark:text-white text-xs font-medium">
             Avinash
           </p> */}
-          <img src="/fivicon2.jpg" alt="logo" className="w-10 h-10" />
+          <img src="/fivicon2.jpg" alt="logo" className="w-10 h-10 rounded-full hover:scale-110 transition-transform duration-300" />
         </a>
 
         {/* Navigation Icons - Vertical Stack */}
@@ -51,7 +51,7 @@ function Navbar() {
                 strokeLinejoin="round"
                 strokeWidth={2}
                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-              />
+              /> 
             </svg>
           </a>
 
@@ -157,7 +157,7 @@ function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Floating Bottom Navbar */}
+      {/* Mobile Floating Bottom Navbar  slayyyyyyyyyyyy*/}
       <nav
         className={`md:hidden fixed bottom-4 left-4 right-4 bg-white/80 dark:bg-[rgb(15,23,42)]/80 backdrop-blur-xl rounded-full shadow-lg h-16 z-50 border border-gray-200 dark:border-gray-800/30 transition-all duration-500 ${
           pageLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"

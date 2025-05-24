@@ -5,7 +5,7 @@ const AchievementCard = ({ title, imageUrl, link }) => {
   return (
     <a
       href={link}
-      target="_blank"
+      
       rel="noopener noreferrer"
       className="group relative overflow-hidden rounded-xl bg-gray-900/5 dark:bg-gray-900/30 hover:bg-gray-900/10 dark:hover:bg-gray-900/40 transition-all duration-300"
     >
@@ -20,10 +20,10 @@ const AchievementCard = ({ title, imageUrl, link }) => {
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 rounded-xl" />
-        <div className="absolute bottom-0 left-0 right-0 p-4">
+        <div className="absolute bottom-0 left-0 right-0 p-4 ">
           <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
           <div className="flex items-center">
-            <div className="h-8 w-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+            {/* <div className="h-8 w-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
               <svg
                 className="w-4 h-4 text-white"
                 fill="none"
@@ -37,7 +37,7 @@ const AchievementCard = ({ title, imageUrl, link }) => {
                   d="M9 5l7 7-7 7"
                 />
               </svg>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -62,11 +62,11 @@ const Achievements = () => {
           link: "",
         },
         {
-          title: "JITS UTSAV runner up",
+          title: "JITS INNOFEST-2025 runners-up",
           imagePath: "big4-2.jpg",
           link: "",
         },
-        // add more achievements here latwr
+        // add more achievements here laterrrr in the future   
       ];
 
       const achievementsWithUrls = achievementsData.map((achievement) => {

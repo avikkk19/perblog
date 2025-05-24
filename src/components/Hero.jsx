@@ -20,16 +20,20 @@ function Hero() {
           travel for fun.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row gap-4 mb-12 ">
           <a
             href="/signbook"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-800"
+            style={{  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
+            rel="noopener noreferrer"
           >
             Sign my guestbook
           </a>
           <a
             href="mailto:avinashkamadri67@gmail.com"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-800"
+            style={{  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
+            rel="noopener noreferrer"
           >
             Send an private email →
           </a>
