@@ -5,7 +5,6 @@ const AchievementCard = ({ title, imageUrl, link }) => {
   return (
     <a
       href={link}
-      
       rel="noopener noreferrer"
       className="group relative overflow-hidden rounded-xl bg-gray-900/5 dark:bg-gray-900/30 hover:bg-gray-900/10 dark:hover:bg-gray-900/40 transition-all duration-300"
     >
@@ -66,7 +65,7 @@ const Achievements = () => {
           imagePath: "big4-2.jpg",
           link: "",
         },
-        // add more achievements here laterrrr in the future   
+        // add more achievements here in later if had any   
       ];
 
       const achievementsWithUrls = achievementsData.map((achievement) => {

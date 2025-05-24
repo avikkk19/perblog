@@ -1,14 +1,39 @@
-if you are here, then you already know me...so slide into my DM! 🐲
+# Personal Portfolio Website
 
-Cloning this repo
+A modern, responsive portfolio website built with React, Vite, TailwindCSS, and Supabase. Features dark mode, blog system, photography gallery, guestbook, and project showcase.
 
----
+## Features
 
-git clone "repo link"
-cd <portfoliobixtch>
-npm i
-npm run dev
+- 🌗 Dark/Light mode toggle
+- 📱 Fully responsive design
+- 📝 Blog system with markdown support
+- 📸 Photography gallery
+- ✍️ Interactive guestbook
+- 🚀 Project showcase
+- ⚡ Fast loading with Vite
+- 🎨 Tailwind CSS styling
+- 🔒 Secure admin interfaces
+- 🗄️ Supabase backend integration
 
----
+## Tech Stack
 
----> DOnt forget to star ⭐
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Supabase](https://supabase.com/)
+- [React Router](https://reactrouter.com/)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- Supabase account and project
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone <repository-url>
+cd portfolio

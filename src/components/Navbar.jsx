@@ -85,7 +85,7 @@ function Navbar() {
             href="/photography"
             className={`text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300 p-2 hover:bg-gray-100 dark:hover:bg-gray-800/40 rounded-full flex items-center justify-center ${
               pageLoaded
-                ? "opacity-100 translate-x-0"
+                ? "opacity-100 translate-x-0" 
                 : "opacity-0 translate-x-4"
             }`}
             style={{ transitionDelay: "200ms" }}
@@ -137,6 +137,18 @@ function Navbar() {
                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
               />
             </svg>
+          </a>
+          <a
+            href="/blog"
+            className={`text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300 p-2 hover:bg-gray-100 dark:hover:bg-gray-800/40 rounded-full flex items-center justify-center ${
+              pageLoaded
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-4"
+            }`}
+            style={{ transitionDelay: "300ms" }}
+            title="Blog"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="fill-current" width="28" height="28"><path fill-opacity=".16" fill-rule="nonzero" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"></path></svg>
           </a>
         </div>
 

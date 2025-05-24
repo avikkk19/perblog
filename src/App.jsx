@@ -8,6 +8,7 @@ import SignBook from "./components/SignBook";
 import Photography from "./components/Photography";
 import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
+import BlogList from "./components/Blog";
 
 function App() {
   return (
@@ -50,6 +51,15 @@ function App() {
             element={
               <main className="md:ml-54 p-4">
                 <Photography />
+                <Footer />
+              </main>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <main className="md:ml-54 p-4">
+                <BlogList />
                 <Footer />
               </main>
             }
