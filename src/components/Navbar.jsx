@@ -259,6 +259,13 @@ function Navbar() {
               />
             </svg>
           </a>
+                 <a
+            href="/blog"
+            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white p-2"
+            aria-label="Blog"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="fill-current" width="28" height="28"><path fill-opacity=".16" fill-rule="nonzero" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"></path></svg>
+          </a>
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white"
