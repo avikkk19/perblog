@@ -9,7 +9,7 @@ function Hero() {
           <span className="text-amber-500 hover:text-amber-600 cursor-alias">
             Avinash, {""}
           </span>
-          I make <span className="text-green-500 bg-zinc-900">full-stack</span>{" "}
+          I make <span className="text-green-500 bg-zinc-900 rounded-sm">full-stack</span>{" "}
           products that I <span className="text-pink-500">love.</span>
         </h1>
 

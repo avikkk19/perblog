@@ -9,6 +9,7 @@ import Photography from "./components/Photography";
 import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 import BlogList from "./components/Blog";
+import LatestProjects from "./components/LatestProjects";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
               <main className="md:ml-54 p-4">
                 <Hero />
                 <Achievements />
-                <Projects />
+                <LatestProjects />
                 <Footer />
               </main>
             }

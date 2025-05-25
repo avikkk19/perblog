@@ -76,6 +76,13 @@ const Projects = () => {
       liveLink: "https://crecon.vercel.app",
     },
     {
+      title: "DrunkDragon",
+      description: "A web app purely about Formula 1.",
+      imagePath: "projects/drunkdragon-icon.jpg",
+      link: "https://github.com/avikkk19/DrunkDragon",
+      liveLink: "https://drunkdragon33.vercel.app",
+    },
+    {
       title: "CardioGuard",
       description:
         "AI-powered cardiac health monitoring and alert system that detects early signs of cardiac arrest using real-time sensor data and machine learning, instantly notifying emergency contacts.",
@@ -91,22 +98,22 @@ const Projects = () => {
       link: "https://github.com/5mokshith/Trefloo-Landing",
       liveLink: "https://trefloo.vercel.app",
     },
-    {
-      title: "DrunkDragon",
-      description:
-        "DrunkDragon is your all-in-one destination for everything Formula 1. From live race updates to exclusive videos and stunning images, we keep you connected to the thrilling world of F1.",
-      imagePath: "projects/trefloo-icon.jpg",
-      link: "https://github.com/avikkk19/drunkdragon",
-      liveLink: "https://drunkdragon.vercel.app/",
-    },
-    {
-      title: "Enzo",
-      description:
-        "Welcome to ENzo — a blog where Formula 1 thrills, the latest tech news, and web development trends collide. Discover the best F1 streaming services, analytics tools, and ways to stay connected with your favorite sport.",
-      imagePath: "projects/trefloo-icon.jpg",
-      link: "https://github.com/avikkk19/enzo",
-      liveLink: "https://enzo-smoky.vercel.app/",
-    },
+    // {
+    //   title: "DrunkDragon",
+    //   description:
+    //     "DrunkDragon is your all-in-one destination for everything Formula 1. From live race updates to exclusive videos and stunning images, we keep you connected to the thrilling world of F1.",
+    //   imagePath: "projects/trefloo-icon.jpg",
+    //   link: "https://github.com/avikkk19/drunkdragon",
+    //   liveLink: "https://drunkdragon.vercel.app/",
+    // },
+    // {
+    //   title: "Enzo",
+    //   description:
+    //     "Welcome to ENzo — a blog where Formula 1 thrills, the latest tech news, and web development trends collide. Discover the best F1 streaming services, analytics tools, and ways to stay connected with your favorite sport.",
+    //   imagePath: "projects/trefloo-icon.jpg",
+    //   link: "https://github.com/avikkk19/enzo",
+    //   liveLink: "https://enzo-smoky.vercel.app/",
+    // },
   ];
 
   const projectsWithUrls = projects.map((project) => {
@@ -131,7 +138,7 @@ const Projects = () => {
     <section className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-5xl mx-auto px-4 md:mx-12">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">
-          Some cool stuff <span className="text-green-500 "> I've built.</span>
+          Latest <span className="text-green-500 ">projects.</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-y-4 mr-[320px]">
           {projectsWithUrls.map((project, index) => (

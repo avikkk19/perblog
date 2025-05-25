@@ -1,0 +1,9 @@
+Title *
+Enter blog title
+Summary *
+Brief summary of the blog post
+Content *
+Full blog content
+Tags
+Enter tags separated by commas (e.g., tech, programming, web)
+Featured Image
