@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase.js'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import rehypeHighlight from 'rehype-highlight'
+import 'highlight.js/styles/github-dark.css' // or another highlight.js theme
 
 export default function BlogList() {
   const [blogs, setBlogs] = useState([])
@@ -170,6 +174,183 @@ export default function BlogList() {
     setShowBlogPage(false)
   }
 
+  // Custom components for ReactMarkdown
+  const markdownComponents = {
+    // Headings
+    h1: ({ children }) => (
+      <h1 className="text-3xl font-bold text-zinc-900 dark:text-white mb-6 mt-8 first:mt-0">
+        {children}
+      </h1>
+    ),
+    h2: ({ children }) => (
+      <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white mb-4 mt-8 first:mt-0">
+        {children}
+      </h2>
+    ),
+    h3: ({ children }) => (
+      <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-3 mt-6 first:mt-0">
+        {children}
+      </h3>
+    ),
+    h4: ({ children }) => (
+      <h4 className="text-lg font-medium text-zinc-900 dark:text-white mb-2 mt-4 first:mt-0">
+        {children}
+      </h4>
+    ),
+    h5: ({ children }) => (
+      <h5 className="text-base font-medium text-zinc-900 dark:text-white mb-2 mt-4 first:mt-0">
+        {children}
+      </h5>
+    ),
+    h6: ({ children }) => (
+      <h6 className="text-sm font-medium text-zinc-900 dark:text-white mb-2 mt-4 first:mt-0">
+        {children}
+      </h6>
+    ),
+    
+    // Paragraphs and text
+    p: ({ children }) => (
+      <p className="text-zinc-700 dark:text-zinc-300 mb-4 leading-relaxed">
+        {children}
+      </p>
+    ),
+    
+    // Links
+    a: ({ href, children }) => (
+      <a 
+        href={href} 
+        className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    ),
+    
+    // Lists
+    ul: ({ children }) => (
+      <ul className="list-disc list-inside text-zinc-700 dark:text-zinc-300 mb-4 space-y-1 ml-4">
+        {children}
+      </ul>
+    ),
+    ol: ({ children }) => (
+      <ol className="list-decimal list-inside text-zinc-700 dark:text-zinc-300 mb-4 space-y-1 ml-4">
+        {children}
+      </ol>
+    ),
+    li: ({ children }) => (
+      <li className="text-zinc-700 dark:text-zinc-300">
+        {children}
+      </li>
+    ),
+    
+    // Code blocks and inline code
+    code: ({ inline, className, children, ...props }) => {
+      const match = /language-(\w+)/.exec(className || '')
+      
+      if (!inline && match) {
+        // Block code with syntax highlighting
+        return (
+          <div className="my-6">
+            <div className="bg-zinc-900 dark:bg-zinc-800 rounded-t-lg px-4 py-2 border-b border-zinc-700">
+              <span className="text-zinc-400 text-sm font-medium">
+                {match[1]}
+              </span>
+            </div>
+            <pre className="bg-zinc-950 dark:bg-zinc-900 rounded-b-lg p-4 overflow-x-auto">
+              <code className={className} {...props}>
+                {children}
+              </code>
+            </pre>
+          </div>
+        )
+      } else if (!inline) {
+        // Block code without language
+        return (
+          <pre className="bg-zinc-100 dark:bg-zinc-800 rounded-lg p-4 overflow-x-auto my-4 border border-zinc-200 dark:border-zinc-700">
+            <code className="text-zinc-800 dark:text-zinc-200 text-sm font-mono">
+              {children}
+            </code>
+          </pre>
+        )
+      } else {
+        // Inline code
+        return (
+          <code className="bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 px-1.5 py-0.5 rounded text-sm font-mono border border-zinc-200 dark:border-zinc-700">
+            {children}
+          </code>
+        )
+      }
+    },
+    
+    // Blockquotes
+    blockquote: ({ children }) => (
+      <blockquote className="border-l-4 border-zinc-400 dark:border-zinc-600 pl-4 my-4 italic text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 py-2">
+        {children}
+      </blockquote>
+    ),
+    
+    // Tables
+    table: ({ children }) => (
+      <div className="overflow-x-auto my-6">
+        <table className="min-w-full border border-zinc-200 dark:border-zinc-700 rounded-lg">
+          {children}
+        </table>
+      </div>
+    ),
+    thead: ({ children }) => (
+      <thead className="bg-zinc-50 dark:bg-zinc-800">
+        {children}
+      </thead>
+    ),
+    tbody: ({ children }) => (
+      <tbody className="bg-white dark:bg-zinc-900/30">
+        {children}
+      </tbody>
+    ),
+    tr: ({ children }) => (
+      <tr className="border-b border-zinc-200 dark:border-zinc-700">
+        {children}
+      </tr>
+    ),
+    th: ({ children }) => (
+      <th className="px-4 py-2 text-left font-semibold text-zinc-900 dark:text-white border-r border-zinc-200 dark:border-zinc-700 last:border-r-0">
+        {children}
+      </th>
+    ),
+    td: ({ children }) => (
+      <td className="px-4 py-2 text-zinc-700 dark:text-zinc-300 border-r border-zinc-200 dark:border-zinc-700 last:border-r-0">
+        {children}
+      </td>
+    ),
+    
+    // Horizontal rule
+    hr: () => (
+      <hr className="my-8 border-t border-zinc-300 dark:border-zinc-600" />
+    ),
+    
+    // Images
+    img: ({ src, alt }) => (
+      <img 
+        src={src} 
+        alt={alt} 
+        className="max-w-full h-auto rounded-lg my-6 border border-zinc-200 dark:border-zinc-700"
+      />
+    ),
+    
+    // Strong and emphasis
+    strong: ({ children }) => (
+      <strong className="font-semibold text-zinc-900 dark:text-white">
+        {children}
+      </strong>
+    ),
+    em: ({ children }) => (
+      <em className="italic text-zinc-700 dark:text-zinc-300">
+        {children}
+      </em>
+    )
+  }
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -193,7 +374,6 @@ export default function BlogList() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
-              
             </button>
           </div>
         </div>
@@ -252,12 +432,13 @@ export default function BlogList() {
 
             {/* Content */}
             <div className="prose prose-lg dark:prose-invert max-w-none">
-              <div 
-                className="text-zinc-700 dark:text-zinc-300 leading-relaxed whitespace-pre-wrap"
-                style={{ lineHeight: '1.8' }}
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeHighlight]}
+                components={markdownComponents}
               >
                 {selectedBlog.content}
-              </div>
+              </ReactMarkdown>
             </div>
           </article>
         </div>
@@ -265,8 +446,7 @@ export default function BlogList() {
     )
   }
 
-  // Main Blog List Pageeeeeeeeeeeeeee look here dude you are at the main blog list page
- 
+  // Main Blog List Page
   return (
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-3xl font-bold text-zinc-900 dark:text-white mb-2 ml-4">
@@ -320,11 +500,6 @@ export default function BlogList() {
                 <div className="relative my-6 flex items-center justify-center">
                   {/* Gradient line */}
                   <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-300 dark:via-zinc-600 to-transparent"></div>
-                  
-                  {/* Center dot */}
-                  {/* <div className="absolute bg-white dark:bg-gray-900 px-3">
-                    <div className="w-2 h-2 rounded-full bg-zinc-400 dark:bg-zinc-500 opacity-60"></div>
-                  </div> */}
                 </div>
               )}
             </div>
@@ -422,13 +597,13 @@ export default function BlogList() {
               {/* Content */}
               <div>
                 <label className="block text-zinc-900 dark:text-white text-sm font-medium mb-2">
-                  Content *
+                  Content * (Markdown supported)
                 </label>
                 <textarea
                   value={blogForm.content}
                   onChange={(e) => handleFormChange('content', e.target.value)}
                   className="w-full p-3 rounded bg-zinc-50 dark:bg-zinc-700 text-zinc-900 dark:text-white border border-zinc-300 dark:border-zinc-600 focus:border-blue-500 focus:outline-none h-32 resize-none"
-                  placeholder="Full blog content"
+                  placeholder="Full blog content (supports Markdown formatting, code blocks with ```language)"
                   required
                 />
               </div>
