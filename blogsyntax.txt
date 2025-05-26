@@ -1,0 +1,211 @@
+# Markdown vs Plain Text Formatting Guide
+
+## Headings
+
+### Markdown:
+```markdown
+# Heading 1 (H1)
+## Heading 2 (H2)
+### Heading 3 (H3)
+#### Heading 4 (H4)
+##### Heading 5 (H5)
+###### Heading 6 (H6)
+```
+
+### Plain Text:
+```
+HEADING 1 (ALL CAPS, often underlined)
+=========
+
+Heading 2 (Title Case)
+----------------------
+
+Heading 3 (Bold or emphasized somehow)
+```
+
+## Paragraphs
+
+### Markdown:
+```markdown
+This is a paragraph. You just write normal text.
+
+This is another paragraph. Leave a blank line between paragraphs.
+
+You can have multiple sentences in one paragraph. They flow together naturally.
+```
+
+### Plain Text:
+```
+This is a paragraph. You just write normal text.
+
+This is another paragraph. Leave a blank line between paragraphs.
+
+You can have multiple sentences in one paragraph. They flow together naturally.
+```
+*Note: Paragraphs work the same in both, but markdown gives you styling options.*
+
+## Links
+
+### Markdown:
+```markdown
+[Link text](https://example.com)
+[Link with title](https://example.com "Optional title")
+<https://example.com> (automatic link)
+```
+
+### Plain Text:
+```
+Link text: https://example.com
+Visit: https://example.com (Optional description)
+https://example.com
+```
+
+## Unordered Lists (Bullets)
+
+### Markdown:
+```markdown
+- Item 1
+- Item 2
+- Item 3
+  - Nested item 1
+  - Nested item 2
+- Item 4
+
+Alternative syntax:
+* Item 1
+* Item 2
++ Item 3
+```
+
+### Plain Text:
+```
+• Item 1
+• Item 2
+• Item 3
+  ◦ Nested item 1
+  ◦ Nested item 2
+• Item 4
+
+Or:
+- Item 1
+- Item 2
+- Item 3
+```
+
+## Ordered Lists (Numbers)
+
+### Markdown:
+```markdown
+1. First item
+2. Second item
+3. Third item
+   1. Nested item 1
+   2. Nested item 2
+4. Fourth item
+
+Auto-numbering (all 1s work too):
+1. First item
+1. Second item
+1. Third item
+```
+
+### Plain Text:
+```
+1. First item
+2. Second item
+3. Third item
+   a. Nested item 1
+   b. Nested item 2
+4. Fourth item
+```
+
+## List Items with Multiple Paragraphs
+
+### Markdown:
+```markdown
+1. First item
+
+   This is a continuation of the first item with proper indentation.
+
+2. Second item
+   
+   Another paragraph for the second item.
+   
+   - Sub-bullet under second item
+   - Another sub-bullet
+
+3. Third item
+```
+
+### Plain Text:
+```
+1. First item
+
+   This is a continuation of the first item.
+
+2. Second item
+   
+   Another paragraph for the second item.
+   
+   - Sub-bullet under second item
+   - Another sub-bullet
+
+3. Third item
+```
+
+## Additional Markdown Elements
+
+### Text Emphasis:
+```markdown
+*italic text* or _italic text_
+**bold text** or __bold text__
+***bold and italic*** or ___bold and italic___
+~~strikethrough~~
+`inline code`
+```
+
+### Code Blocks:
+```markdown
+```javascript
+function hello() {
+  console.log("Hello World!");
+}
+```
+```
+
+### Blockquotes:
+```markdown
+> This is a blockquote
+> It can span multiple lines
+>
+> And have multiple paragraphs
+```
+
+### Tables:
+```markdown
+| Column 1 | Column 2 | Column 3 |
+|----------|----------|----------|
+| Row 1    | Data     | More     |
+| Row 2    | Data     | More     |
+```
+
+### Horizontal Rules:
+```markdown
+---
+or
+***
+or
+___
+```
+
+## Tips for Your Blog Component
+
+Based on your ReactMarkdown setup, you can use all these markdown features in your blog content:
+
+1. **Headings**: Use `#` for different heading levels
+2. **Code blocks**: Use triple backticks with language specification for syntax highlighting
+3. **Links**: Use `[text](url)` format - they'll open in new tabs due to your custom component
+4. **Lists**: Use `-` or `*` for bullets, numbers for ordered lists
+5. **Emphasis**: Use `*` or `**` for italic/bold text
+
+Your custom `markdownComponents` will automatically style these elements with your dark/light theme classes.

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase.js'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import rehypeHighlight from 'rehype-highlight'
-import 'highlight.js/styles/github-dark.css' // or another highlight.js theme
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 export default function BlogList() {
   const [blogs, setBlogs] = useState([])
@@ -244,43 +244,50 @@ export default function BlogList() {
       </li>
     ),
     
-    // Code blocks and inline code
-    code: ({ inline, className, children, ...props }) => {
+    // Code blocks and inline code - FIXED VERSION
+    code: ({ node, inline, className, children, ...props }) => {
       const match = /language-(\w+)/.exec(className || '')
+      const language = match ? match[1] : ''
       
-      if (!inline && match) {
+      if (!inline) {
         // Block code with syntax highlighting
         return (
-          <div className="my-6">
-            <div className="bg-zinc-900 dark:bg-zinc-800 rounded-t-lg px-4 py-2 border-b border-zinc-700">
-              <span className="text-zinc-400 text-sm font-medium">
-                {match[1]}
-              </span>
-            </div>
-            <pre className="bg-zinc-950 dark:bg-zinc-900 rounded-b-lg p-4 overflow-x-auto">
-              <code className={className} {...props}>
-                {children}
-              </code>
-            </pre>
+          <div className="my-6 rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-700">
+            {language && (
+              <div className="bg-zinc-800 dark:bg-zinc-900 px-4 py-2 text-zinc-300 text-sm font-medium border-b border-zinc-700">
+                {language}
+              </div>
+            )}
+            <SyntaxHighlighter
+              style={oneDark}
+              language={language || 'text'}
+              PreTag="div"
+              customStyle={{
+                margin: 0,
+                borderRadius: language ? '0 0 0.5rem 0.5rem' : '0.5rem',
+                fontSize: '0.875rem',
+                lineHeight: '1.5',
+                background: '#0d1117'
+              }}
+              {...props}
+            >
+              {String(children).replace(/\n$/, '')}
+            </SyntaxHighlighter>
           </div>
-        )
-      } else if (!inline) {
-        // Block code without language
-        return (
-          <pre className="bg-zinc-100 dark:bg-zinc-800 rounded-lg p-4 overflow-x-auto my-4 border border-zinc-200 dark:border-zinc-700">
-            <code className="text-zinc-800 dark:text-zinc-200 text-sm font-mono">
-              {children}
-            </code>
-          </pre>
         )
       } else {
         // Inline code
         return (
-          <code className="bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 px-1.5 py-0.5 rounded text-sm font-mono border border-zinc-200 dark:border-zinc-700">
+          <code className="bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 px-1.5 py-0.5 rounded text-sm font-mono border border-zinc-200 dark:border-zinc-700" {...props}>
             {children}
           </code>
         )
       }
+    },
+    
+    // Pre tags - prevent double wrapping
+    pre: ({ children }) => {
+      return <>{children}</>
     },
     
     // Blockquotes
@@ -357,9 +364,7 @@ export default function BlogList() {
         <div className="text-zinc-600 dark:text-zinc-400">Loading blogs...</div>
       </div>
     )
-  }
-
-  // Blog Detail Page
+  }// Blog Detail Page
   if (showBlogPage && selectedBlog) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900/30">
@@ -434,7 +439,6 @@ export default function BlogList() {
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
-                rehypePlugins={[rehypeHighlight]}
                 components={markdownComponents}
               >
                 {selectedBlog.content}
@@ -519,7 +523,7 @@ export default function BlogList() {
               •••
             </button>
 
-            {/* Password Modal */}
+            {/* Password Modal - FIXED WITH FORM */}
             <dialog
               id="password-modal"
               className="modal p-6 rounded-lg bg-zinc-800 dark:bg-zinc-900 shadow-xl"
