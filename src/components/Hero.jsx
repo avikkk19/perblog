@@ -1,4 +1,6 @@
 import React from "react";
+import musicImg from "../assets/music.jpg"
+import maxImg from "../assets/max.jpg"
 
 function Hero() {
   return (
@@ -121,6 +123,47 @@ function Hero() {
           </a>
         </div> */}
       </div>
+      {/* image playlisttttttt broksy */}
+      <a className="fixed top-1/2 right-8 w-80 z-50 cursor-pointer" href="https://www.formula1.com/" target="_blank">
+        <section className="relative rounded-lg overflow-hidden shadow-lg">
+          <img
+            src={maxImg}
+            alt="music playlist"
+            className="w-full h-54 object-cover  brightness-50"
+          />
+          {/* Overlay content hereeeeeeeee  */}
+          <div className="absolute inset-0 flex flex-col justify-center items-center px-6 py-8">
+            <h2 className="text-3xl font-bold text-white mb-2 drop-shadow-lg">
+              Sports.
+            </h2>
+            <div className="text-white text-center text-lg font-medium drop-shadow-lg">
+             I’ve been following Formula 1 lately—it’s awesome.
+
+
+            </div>
+          </div>
+        </section>
+      </a>
+      {/* add moreeeeeeeeeeeeeeeeeeeeeee*/}
+      <a className="fixed top-6 right-8 w-80 z-50 cursor-pointer " href="https://music.apple.com/in/playlist/music/pl.u-b3b8VGgF3Kq9gdV"
+      target="_blank">
+        <section className="relative rounded-lg overflow-hidden shadow-lg">
+          <img
+            src={musicImg}
+            alt="music playlist"
+            className="w-full h-full object-cover  brightness-50"
+          />
+          {/* Overlay content */}
+          <div className="absolute inset-0 flex flex-col justify-center items-center px-6 py-8">
+            <h2 className="text-3xl font-bold text-white mb-2 drop-shadow-lg">
+              Playlist.
+            </h2>
+            <div className="text-white text-center text-lg font-medium drop-shadow-lg">
+              These are the songs I listen to regularly, depending on my mood.
+            </div>
+          </div>
+        </section>
+      </a>
     </div>
   );
 }
