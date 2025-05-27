@@ -209,11 +209,21 @@ export default function BlogList() {
     ),
     
     // Paragraphs and text
-    p: ({ children }) => (
-      <p className="text-zinc-700 dark:text-zinc-300 mb-4 leading-relaxed">
-        {children}
-      </p>
-    ),
+    p: ({ children }) => {
+      // Prevent <div> inside <p> by checking if children contains a block element
+      const hasBlock = Array.isArray(children) && children.some(child => {
+        if (!child) return false;
+        if (typeof child === 'object' && child.type) {
+          const blockTags = ['div', 'pre', 'table', 'blockquote', 'ul', 'ol', 'hr', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+          return blockTags.includes(child.type);
+        }
+        return false;
+      });
+      if (hasBlock) {
+        return <div className="text-zinc-700 dark:text-zinc-300 mb-4 leading-relaxed">{children}</div>;
+      }
+      return <p className="text-zinc-700 dark:text-zinc-300 mb-4 leading-relaxed">{children}</p>;
+    },
     
     // Links
     a: ({ href, children }) => (
@@ -538,6 +548,7 @@ export default function BlogList() {
                     placeholder="Enter password"
                     className="w-full p-2 rounded bg-zinc-700 dark:bg-zinc-800 text-white border border-zinc-600 dark:border-zinc-700 focus:border-blue-500 focus:outline-none"
                     required
+                    autoComplete="new-password"
                   />
                 </div>
                 {passwordError && (
