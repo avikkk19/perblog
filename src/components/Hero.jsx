@@ -124,7 +124,7 @@ function Hero() {
         </div> */}
       </div>
       {/* image playlisttttttt broksy */}
-      <a className="fixed top-1/2 right-8 w-80 z-50 cursor-pointer" href="https://www.formula1.com/" target="_blank">
+      <a className="fixed top-1/2 right-8 w-80 z-50 cursor-pointer hidden lg:block" href="https://www.formula1.com/" target="_blank">
         <section className="relative rounded-lg overflow-hidden shadow-lg">
           <img
             src={maxImg}
@@ -145,7 +145,7 @@ function Hero() {
         </section>
       </a>
       {/* add moreeeeeeeeeeeeeeeeeeeeeee*/}
-      <a className="fixed top-6 right-8 w-80 z-50 cursor-pointer " href="https://music.apple.com/in/playlist/music/pl.u-b3b8VGgF3Kq9gdV"
+      <a className="fixed top-6 right-8 w-80 z-50 cursor-pointer hidden lg:block" href="https://music.apple.com/in/playlist/music/pl.u-b3b8VGgF3Kq9gdV"
       target="_blank">
         <section className="relative rounded-lg overflow-hidden shadow-lg">
           <img

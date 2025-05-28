@@ -15,7 +15,7 @@ function Footer() {
             >
               @avikkk19
             </a>
-            . All rights reserved.
+            . All rights reserved. jk clone it '_'
           </p>
           <p className="dark:text-white text-sm text-black font-mono">Thank you for visiting!</p>
         </div>
