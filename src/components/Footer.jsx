@@ -5,19 +5,19 @@ function Footer() {
     <footer className="w-full py-6 dark:bg-gray-900/30 bg-white border-t border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         <div className="mb-4 md:mb-0">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-gray-600 dark:text-gray-400 font-mono">
             &copy; {new Date().getFullYear()}{" "}
             <a
               href="https://github.com/avikkk19"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 hover:text-blue-700 transition-colors"
+              className="text-blue-500 hover:text-blue-700 transition-colors font-mono"
             >
               @avikkk19
             </a>
             . All rights reserved.
           </p>
-          <p className="dark:text-white text-sm text-black">Thank you for visiting!</p>
+          <p className="dark:text-white text-sm text-black font-mono">Thank you for visiting!</p>
         </div>
         <div className="flex space-x-4">
           <a

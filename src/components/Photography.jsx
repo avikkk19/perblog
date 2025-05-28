@@ -150,11 +150,12 @@ const Photography = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold text-zinc-900 dark:text-white mb-2">
-        My <span className="text-green-500">Photography, </span>
+      <h2 className="text-3xl font-bold text-zinc-900 dark:text-white ">
+        My <span className="text-green-500">clicks, </span>
       </h2>
-      <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-8 ml-4">
+      <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-8">
         and <span className="text-green-500">the images i admire.</span>
+        <p className="text-xs font-mono mt-12">pro tip : click on them to open in an blank targed page</p>
       </h2>
 
       {photos.length === 0 ? (
@@ -170,6 +171,8 @@ const Photography = () => {
               key={photo.id}
               className="overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
             >
+              <a href={photo.url} target="_blank" 
+              rel="noopener noreferrer" >
               <div className="relative pb-[66.25%]">
                 <img
                   src={photo.url}
@@ -181,7 +184,7 @@ const Photography = () => {
                       "https://via.placeholder.com/600x400?text=Image+Not+Found";
                   }}
                 />
-              </div>
+              </div></a>
               {photo.name && (
                 <div className="p-2 bg-gray-800 bg-opacity-80">
                   <p className="text-sm text-gray-300 text-center">

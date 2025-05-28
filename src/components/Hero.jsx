@@ -15,7 +15,7 @@ function Hero() {
           products that I <span className="text-pink-500">love.</span>
         </h1>
 
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 capitalize">
+        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 capitalize ">
           Developer, Tech Enthusiast, OSS Contributor, Cowboy fan,{"  "}
           <span className="text-blue-500">Gamer</span> and Student.
           <br /> I play, read, <span className="text-blue-500">write</span> and

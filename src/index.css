@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  @apply box-border;
+  @apply font-mono;
+}
 @layer base {
   body {
     @apply antialiased;
