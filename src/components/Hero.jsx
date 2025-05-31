@@ -1,9 +1,9 @@
 import React from "react";
-import musicImg from "../assets/music.jpg"
+import musicImg from "../assets/playlistcover.jpg"
 import maxImg from "../assets/max.jpg"
 
 function Hero() {
-  return (
+  return ( 
     <div className="py-20 md:ml-20 ml-4 relative">
       <div className="max-w-3xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white capitalize">
@@ -16,7 +16,7 @@ function Hero() {
         </h1>
 
         <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 capitalize ">
-          Developer, Tech Enthusiast, OSS Contributor, Cowboy fan,{"  "}
+          Developer, Tech Enthusiast, {""}
           <span className="text-blue-500">Gamer</span> and Student.
           <br /> I play, read, <span className="text-blue-500">write</span> and
           travel for fun.

@@ -22,7 +22,8 @@ const ProjectCard = ({ title, description, imageUrl, link, liveLink }) => {
                 // console.error("Image failed to load:", e.target.src);
                 e.target.onerror = null;
                 e.target.src = projectsIcon;
-              }}
+              }} 
+              
             />
           </div>
 

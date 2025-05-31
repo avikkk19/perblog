@@ -6,6 +6,10 @@
   @apply box-border;
   @apply font-mono;
 }
+code {
+  white-space: normal;
+}
+
 @layer base {
   body {
     @apply antialiased;
