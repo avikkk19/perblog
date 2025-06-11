@@ -80,7 +80,7 @@ const Projects = () => {
       description: "A web app purely about Formula 1.",
       imagePath: "projects/drunkdragon-icon.jpg",
       link: "https://github.com/avikkk19/DrunkDragon",
-      liveLink: "https://drunkdragon33.vercel.app",
+      liveLink: "https://drunkdragon.vercel.app",
     },
     {
       title: "CardioGuard",
