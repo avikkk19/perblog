@@ -1,6 +1,6 @@
 import React from "react";
 import { supabase } from "../lib/supabase";
-import projectsIcon from "../../public/projects.png";
+import projectsIcon from "../../public/image.png";
 
 const ProjectCard = ({ title, description, imageUrl, link, liveLink }) => {
   return (

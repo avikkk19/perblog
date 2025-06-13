@@ -1,6 +1,6 @@
 import React from "react";
 import { supabase } from "../lib/supabase";
-import projectsIcon from "../../public/projects.png";
+import projectsIcon from "../../public/image.png";
 
 const ProjectCard = ({ title, description, imageUrl, link, liveLink }) => {
   return (
@@ -16,7 +16,7 @@ const ProjectCard = ({ title, description, imageUrl, link, liveLink }) => {
             <img
               src={imageUrl}
               alt={title}
-              className="w-8 h-8 object-contain rounded-full"
+              className="w-10 h-10 object-contain rounded-full"
               loading="lazy"
               onError={(e) => {
                 // console.error("Image failed to load:", e.target.src);
