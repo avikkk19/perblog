@@ -1,4 +1,5 @@
 import React from "react";
+import resume from "../../public/portfolio/AvinashResume.pdf";
 
 function Footer() {
   return (
@@ -51,6 +52,16 @@ function Footer() {
               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
             </svg>
           </a>
+        <p className="text-sm text-gray-600 dark:text-gray-400 font-mono">
+          <a
+            href={resume}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:text-blue-700 transition-colors font-mono"
+          >
+            My Resume
+          </a>
+        </p>
         </div>
       </div>
     </footer>

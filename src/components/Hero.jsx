@@ -109,7 +109,7 @@ function Hero() {
               Sports.
             </h2>
             <div className="text-white text-center text-lg font-medium drop-shadow-lg">
-             I’ve been following Formula 1 lately—it’s a thrilling sport that combines speed, strategy, and technology.
+             I’ve been following F1 <br/> lately—it’s a thrilling sport that combines speed, strategy, and technology.
 
 
             </div>
