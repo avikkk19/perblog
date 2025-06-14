@@ -31,12 +31,10 @@ const ProjectCard = ({ title, description, imageUrl, bgImage, link, liveLink }) 
                 e.target.src = projectsIcon;
               }}
             />
-          </div>
-
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+          </div>          <h3 className="text-xl font-semibold text-white mb-3">
             {title}
           </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+          <p className="text-sm text-white/80 mb-4 flex-grow">
             {description}
           </p>
 
@@ -45,14 +43,14 @@ const ProjectCard = ({ title, description, imageUrl, bgImage, link, liveLink }) 
               href={liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-green-400 dark:text-green-500  transition-colors  bg-zinc-800 dark:bg-gray-700 rounded-md px-2 py-1"
+              className="text-sm font-medium text-white transition-colors bg-green-500/80 hover:bg-green-500 rounded-md px-2 py-1"
               onClick={(e) => e.stopPropagation()}
             >
               View Live Website
             </a>
             <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center group-hover:bg-gray-300 dark:group-hover:bg-gray-700 transition-colors duration-200">
               <svg
-                className="w-4 h-4 text-gray-700 dark:text-gray-300"
+                className="w-4 h-4 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
