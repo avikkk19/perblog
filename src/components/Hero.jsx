@@ -1,6 +1,7 @@
 import React from "react";
 import musicImg from "../assets/playlistcover.jpg"
 import maxImg from "../assets/max.jpg"
+import resume from "../../public/portfolio/AvinashResume.pdf";
 
 function Hero() {
   return ( 
@@ -8,7 +9,7 @@ function Hero() {
       <div className="max-w-3xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white capitalize">
           I'm{" "}
-          <a href="https://github.com/avikkk19" className="text-amber-500 hover:text-amber-600 cursor-alias">
+          <a href={resume} className="text-amber-500 hover:text-amber-600 cursor-alias" download="AvinashResume.pdf">
             Avinash, {""}
           </a>
           I make <span className="text-green-500 bg-zinc-900 rounded-sm">full-stack</span>{" "}
