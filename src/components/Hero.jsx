@@ -96,12 +96,12 @@ function Hero() {
 
       </div>
       {/* image playlisttttttt broksy */}
-      <a className="fixed top-1/2 right-8 w-80 z-50 cursor-pointer hidden lg:block" href="https://www.formula1.com/" target="_blank">
-        <section className="relative rounded-lg overflow-hidden shadow-lg">
+      <a className="fixed top-64 right-36 w-80 z-50 cursor-pointer hidden lg:block" href="https://www.formula1.com/" target="_blank">
+        <section className="relative rounded-2xl overflow-hidden shadow-lg">
           <img
             src={maxImg}
             alt="music playlist"
-            className="w-full h-54 object-cover  brightness-95"
+            className="w-full h-40 object-cover  brightness-95"
           />
           {/* Overlay content hereeeeeeeee  */}
           <div className="absolute inset-0 flex flex-col justify-center items-center px-6 py-8 bg-black/60">
@@ -109,21 +109,19 @@ function Hero() {
               Sports.
             </h2>
             <div className="text-white text-center text-lg font-medium drop-shadow-lg">
-             I’ve been following F1 <br/> lately—it’s a thrilling sport that combines speed, strategy, and technology.
-
-
+              I’ve been following F1 <br /> lately—it’s a thrilling sport that combines speed, strategy, and technology.
             </div>
           </div>
         </section>
       </a>
       {/* add moreeeeeeeeeeeeeeeeeeeeeee*/}
-      <a className="fixed top-6 right-8 w-80 z-50 cursor-pointer hidden lg:block" href="https://open.spotify.com/playlist/3Tn55g8XnYJVZzQ8K6U9Fg?si=5877f4329f70426a"
+      <a className="fixed top- right-36 w-80 z-50 cursor-pointer hidden lg:block" href="https://open.spotify.com/playlist/3Tn55g8XnYJVZzQ8K6U9Fg?si=5877f4329f70426a"
       target="_blank">
-        <section className="relative rounded-lg overflow-hidden shadow-lg">
+        <section className="relative rounded-2xl overflow-hidden shadow-lg">
           <img
             src={musicImg}
             alt="music playlist"
-            className="w-full h-full object-cover  brightness-20"
+            className="w-full h-40 object-cover  brightness-20"
           />
           {/* Overlay content */}
           <div className="absolute inset-0 flex flex-col justify-center items-center px-6 py-8 bg-black/60">

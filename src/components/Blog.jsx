@@ -491,65 +491,60 @@ export default function BlogList() {
 
   // Main Blog List Page
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold text-zinc-900 dark:text-white mb-2 ml-4">
-        My <span className="text-blue-600 dark:text-blue-400">Blog Posts</span>
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      <h2 className="text-4xl font-bold text-zinc-900 dark:text-white mb-12">
+        My Blog
       </h2>
-      <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8 ml-4">
-        Thoughts, ideas, and stories worth sharing.
-      </p>
 
       {blogs.length === 0 ? (
         <div className="text-center py-10">
-          <p className="text-zinc-400 dark:text-zinc-500">
+          <p className="text-zinc-500 dark:text-zinc-400">
             No blog posts yet. Check back soon for new content.
           </p>
         </div>
       ) : (
-        <div className="space-y-6">
-          {blogs.map((blog, index) => (
-            <div key={blog.blog_id} className="group">
-              <div
-                onClick={() => openBlogPage(blog)}
-                className="cursor-pointer p-6 bg-white dark:bg-gray-900/30 rounded-lg shadow-sm hover:shadow-sm transition-all duration-300"
-              >
-                <div className="flex justify-between items-start">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
-                      {blog.title}
-                    </h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2">
-                      {new Date(blog.created_at).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </p>
-                  </div>
-                  <div className="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <svg
-                      className="w-5 h-5 text-zinc-400 dark:text-zinc-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </div>
-                </div>
+        <div className="space-y-16">
+          {blogs.map((blog) => (
+            <div
+              key={blog.blog_id}
+              className="group cursor-pointer"
+              onClick={() => openBlogPage(blog)}
+            >
+              <div className="flex items-baseline gap-6 text-zinc-500 dark:text-zinc-400 text-sm mb-2">
+                <time>
+                  {new Date(blog.created_at).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  }).toUpperCase()}
+                </time>
+                <span>{blog.readTime || "8 MIN READ"}</span>
               </div>
 
-              {index < blogs.length - 1 && (
-                <div className="relative my-6 flex items-center justify-center">
-                  {/* Gradient line */}
-                  <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-300 dark:via-zinc-600 to-transparent"></div>
-                </div>
-              )}
+              <h3 className="text-2xl font-semibold text-zinc-900 dark:text-white group-hover:text-blue-400 transition-colors duration-200">
+                {blog.title}
+              </h3>
+
+              <p className="mt-3 text-zinc-600 dark:text-zinc-400 line-clamp-2">
+                {blog.summary}
+              </p>
+
+              <div className="mt-4 flex items-center gap-2 text-blue-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
+                <span>Read more</span>
+                <svg
+                  className="w-4 h-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </div>
             </div>
           ))}
         </div>
