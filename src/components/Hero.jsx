@@ -96,8 +96,8 @@ function Hero() {
 
       </div>
       {/* image playlisttttttt broksy */}
-      <a className="fixed top-64 right-36 w-80 z-50 cursor-pointer hidden lg:block" href="https://www.formula1.com/" target="_blank">
-        <section className="relative rounded-2xl overflow-hidden shadow-lg">
+      <a className="fixed top-20 right-36 w-80 z-50 cursor-pointer hidden lg:block" href="https://www.formula1.com/" target="_blank">
+        <section className="relative rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.07)] dark:shadow-[0_4px_20px_rgba(59,130,246,0.1)] dark:hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)]">
           <img
             src={maxImg}
             alt="music playlist"
@@ -115,9 +115,9 @@ function Hero() {
         </section>
       </a>
       {/* add moreeeeeeeeeeeeeeeeeeeeeee*/}
-      <a className="fixed top- right-36 w-80 z-50 cursor-pointer hidden lg:block" href="https://open.spotify.com/playlist/3Tn55g8XnYJVZzQ8K6U9Fg?si=5877f4329f70426a"
+      <a className="fixed top-64 right-36 w-80 z-50 cursor-pointer hidden lg:block" href="https://open.spotify.com/playlist/3Tn55g8XnYJVZzQ8K6U9Fg?si=5877f4329f70426a"
       target="_blank">
-        <section className="relative rounded-2xl overflow-hidden shadow-lg">
+        <section className="relative rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.07)] dark:shadow-[0_4px_20px_rgba(59,130,246,0.1)] dark:hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)]">
           <img
             src={musicImg}
             alt="music playlist"

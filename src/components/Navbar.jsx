@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
-import favicon from "../../public/favicon1.png";
+import favicon from "../../public/senna.png";
 
 function Navbar() {
   const { isDark, toggleTheme } = useTheme();
@@ -25,7 +25,7 @@ function Navbar() {
           {/* <p className="text-gray-900 dark:text-white text-xs font-medium">
             Avinash
           </p> */}
-          <img src={favicon} alt="logo" className="w-10 h-10 rounded-full hover:scale-110 transition-transform duration-300" />
+          <img src={favicon} alt="logo" className="w-14 h-25 rounded-full hover:scale-110 transition-transform duration-300" />
         </a>
 
         {/* Navigation Icons - Vertical Stack */}

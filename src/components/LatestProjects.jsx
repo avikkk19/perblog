@@ -2,67 +2,62 @@ import React from "react";
 import { supabase } from "../lib/supabase";
 import projectsIcon from "../../public/image.png";
 
-const ProjectCard = ({ title, description, imageUrl, bgImage, link, liveLink }) => {
-  return (
-    <div className="group relative overflow-hidden rounded-xl bg-gray-900/5 dark:bg-gray-900/30 hover:bg-gray-900/10 dark:hover:bg-gray-900/40 transition-all duration-300 w-80">
+const ProjectCard = ({ title, description, imageUrl, bgImage, link, liveLink }) => {  return (    <div className="group relative overflow-hidden rounded-xl bg-transparent hover:bg-white/5 dark:hover:bg-white/5 transition-all duration-300 w-80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.07)] dark:shadow-[0_4px_20px_rgba(59,130,246,0.1)] dark:hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)]">
       <a
         href={link}
         target="_blank"
         rel="noopener noreferrer"
         className="block h-full"
-      >        <div 
-          className="p-4 flex flex-col h-full dark:bg-gray-800/95 bg-gray-200/95 w-80 rounded-xl relative"
-          style={bgImage ? {
-            backgroundImage: `url(${bgImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          } : {}}>
-          <div className="absolute inset-0 bg-gray-900/90 dark:bg-gray-900/90 rounded-xl"></div>
+      >
+        <div className="p-4 flex flex-col h-full bg-transparent w-80 rounded-xl relative">
           <div className="relative z-10">
-          <div className="w-12 h-12 dark:bg-gray-700 bg-gray-200 rounded-full flex items-center justify-center mb-2">
-            <img
-              src={imageUrl}
-              alt={title}
-              className="w-10 h-10 object-contain rounded-full"
-              loading="lazy"
-              onError={(e) => {
-                // console.error("Image failed to load:", e.target.src);
-                e.target.onerror = null;
-                e.target.src = projectsIcon;
-              }}
-            />
-          </div>          <h3 className="text-xl font-semibold text-white mb-3">
-            {title}
-          </h3>
-          <p className="text-sm text-white/80 mb-4 flex-grow">
-            {description}
-          </p>
+            <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-2">
+              <img
+                src={imageUrl}
+                alt={title}
+                className="w-8 h-8 object-contain rounded-full"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = projectsIcon;
+                }}
+              />
+            </div>
 
-          <div className="flex justify-between items-center">
-            <a
-              href={liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-white transition-colors bg-green-500/80 hover:bg-green-500 rounded-md px-2 py-1"
-              onClick={(e) => e.stopPropagation()}
-            >
-              View Live Website
-            </a>
-            <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center group-hover:bg-gray-300 dark:group-hover:bg-gray-700 transition-colors duration-200">
-              <svg
-                className="w-4 h-4 text-green-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+              {title}
+            </h3>
+            
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+              {description}
+            </p>
+
+            <div className="flex justify-between items-center">
+              <a
+                href={liveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-white transition-colors bg-green-500/90 hover:bg-green-500 rounded-md px-2 py-1"
+                onClick={(e) => e.stopPropagation()}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </div>          </div>
+                View Live Website
+              </a>
+              <div className="h-8 w-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors duration-200">
+                <svg
+                  className="w-4 h-4 text-green-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       </a>
@@ -126,14 +121,14 @@ const Projects = () => {
     }
   });
 
-  return (
-    <section className="py-20 bg-gray-50 dark:bg-gray-900">
+  return (    <section className="py-20 bg-transparent">
       <div className="max-w-5xl mx-auto px-4 md:mx-12">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">
           Latest <span className="text-green-500 ">projects.</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-y-4 mr-[320px]">
-          {projectsWithUrls.map((project, index) => (            <ProjectCard
+          {projectsWithUrls.map((project, index) => (
+            <ProjectCard
               key={index}
               title={project.title}
               description={project.description}
