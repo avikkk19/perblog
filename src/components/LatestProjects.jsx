@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import projectsIcon from "../../public/image.png";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const ProjectCard = ({ title, description, imageUrl, bgImage, link, liveLink }) => {  return (    <div className="group relative overflow-hidden rounded-xl bg-transparent hover:bg-white/5 dark:hover:bg-white/5 transition-all duration-300 w-80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.07)] dark:shadow-[0_4px_20px_rgba(59,130,246,0.1)] dark:hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)]">
+gsap.registerPlugin(ScrollTrigger);
+
+const ProjectCard = ({
+  title,
+  description,
+  imageUrl,
+  bgImage,
+  link,
+  liveLink,
+}) => {
+  return (
+    <div className="group relative overflow-hidden rounded-xl bg-transparent hover:bg-white/5 dark:hover:bg-white/5 transition-all duration-300 w-80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.07)] dark:shadow-[0_4px_20px_rgba(59,130,246,0.1)] dark:hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)]">
       <a
         href={link}
         target="_blank"
@@ -27,7 +40,7 @@ const ProjectCard = ({ title, description, imageUrl, bgImage, link, liveLink }) 
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
               {title}
             </h3>
-            
+
             <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-grow">
               {description}
             </p>
@@ -66,6 +79,28 @@ const ProjectCard = ({ title, description, imageUrl, bgImage, link, liveLink }) 
 };
 
 const Projects = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    if (sectionRef.current) {
+      gsap.fromTo(
+        sectionRef.current,
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
+  }, []);
+
   const projects = [
     {
       title: "Crecon",
@@ -90,7 +125,8 @@ const Projects = () => {
         "AI-powered cardiac health monitoring and alert system that detects early signs of cardiac arrest using real-time sensor data and machine learning, instantly notifying emergency contacts.",
       imagePath: "projects/cardioguard-icon.jpg",
       link: "https://github.com/5mokshith/CardioGuard",
-      liveLink: "https://cardio-guard-landing-page-ggqpsmfv0-mokshiths-projects-8dc2221a.vercel.app",
+      liveLink:
+        "https://cardio-guard-landing-page-ggqpsmfv0-mokshiths-projects-8dc2221a.vercel.app",
     },
     {
       title: "Trefloo-Landing",
@@ -121,7 +157,8 @@ const Projects = () => {
     }
   });
 
-  return (    <section className="py-20 bg-transparent">
+  return (
+    <section ref={sectionRef} className="py-20 bg-transparent">
       <div className="max-w-5xl mx-auto px-4 md:mx-12">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">
           Latest <span className="text-green-500 ">projects.</span>

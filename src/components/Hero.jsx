@@ -1,33 +1,119 @@
-import React from "react";
-import musicImg from "../assets/playlistcover.jpg"
-import maxImg from "../assets/max.jpg"
+import React, { useEffect, useRef } from "react";
+import musicImg from "../assets/playlistcover.jpg";
+import maxImg from "../assets/max.jpg";
 import resume from "../../public/portfolio/AvinashResume.pdf";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function Hero() {
-  return ( 
+  const headingRef = useRef(null);
+  const paraRef = useRef(null);
+  const btnsRef = useRef(null);
+  const socialRef = useRef(null);
+
+  useEffect(() => {
+    // Use fromTo to ensure text is visible after animation
+    gsap.fromTo(
+      headingRef.current,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+    gsap.fromTo(
+      paraRef.current,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: paraRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+    gsap.fromTo(
+      btnsRef.current,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: btnsRef.current,
+          start: "top 90%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+    gsap.fromTo(
+      socialRef.current,
+      { opacity: 0, y: 10 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: socialRef.current,
+          start: "top 95%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }, []);
+
+  return (
     <div className="py-20 md:ml-20 ml-4 relative">
       <div className="max-w-3xl">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white capitalize">
+        <h1
+          ref={headingRef}
+          className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white capitalize"
+        >
           I'm{" "}
-          <a href={resume} className="text-amber-500 hover:text-amber-600 cursor-alias" download="AvinashResume.pdf">
+          <a
+            href={resume}
+            className="text-amber-500 hover:text-amber-600 cursor-alias"
+            download="AvinashResume.pdf"
+          >
             Avinash, {""}
           </a>
-          I make <span className="text-green-500 bg-zinc-900 rounded-sm">full-stack</span>{" "}
+          I make{" "}
+          <span className="text-green-500 bg-zinc-900 rounded-sm">
+            full-stack
+          </span>{" "}
           products that I <span className="text-pink-500">love.</span>
         </h1>
 
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 capitalize ">
+        <p
+          ref={paraRef}
+          className="text-lg text-gray-600 dark:text-gray-300 mb-8 capitalize "
+        >
           Developer, Tech Enthusiast, {""}
           <span className="text-blue-500">Gamer</span> and Student.
           <br /> I play, read, <span className="text-blue-500">write</span> and
           travel for fun.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 mb-12 ">
+        <div ref={btnsRef} className="flex flex-col sm:flex-row gap-4 mb-12 ">
           <a
             href="/signbook"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-800"
-            style={{  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
+            style={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
             rel="noopener noreferrer"
           >
             Sign my guestbook
@@ -35,7 +121,7 @@ function Hero() {
           <a
             href="mailto:avinashkamadri67@gmail.com"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-800"
-            style={{  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
+            style={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
             rel="noopener noreferrer"
           >
             Send an private email →
@@ -43,7 +129,7 @@ function Hero() {
         </div>
 
         {/* Social Links */}
-        <div className="flex items-center gap-6">
+        <div ref={socialRef} className="flex items-center gap-6">
           <a
             href="https://github.com/avikkk19"
             target="_blank"
@@ -93,10 +179,13 @@ function Hero() {
             </svg>
           </a>
         </div>
-
       </div>
       {/* image playlisttttttt broksy */}
-      <a className="fixed top-20 right-36 w-80 z-50 cursor-pointer hidden lg:block" href="https://www.formula1.com/" target="_blank">
+      <a
+        className="fixed top-20 right-36 w-80 z-50 cursor-pointer hidden lg:block"
+        href="https://www.formula1.com/"
+        target="_blank"
+      >
         <section className="relative rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.07)] dark:shadow-[0_4px_20px_rgba(59,130,246,0.1)] dark:hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)]">
           <img
             src={maxImg}
@@ -109,14 +198,18 @@ function Hero() {
               Sports.
             </h2>
             <div className="text-white text-center text-lg font-medium drop-shadow-lg">
-              I’ve been following F1 <br /> lately—it’s a thrilling sport that combines speed, strategy, and technology.
+              I've been following F1 <br /> lately—it's a thrilling sport that
+              combines speed, strategy, and technology.
             </div>
           </div>
         </section>
       </a>
       {/* add moreeeeeeeeeeeeeeeeeeeeeee*/}
-      <a className="fixed top-64 right-36 w-80 z-50 cursor-pointer hidden lg:block" href="https://open.spotify.com/playlist/3Tn55g8XnYJVZzQ8K6U9Fg?si=5877f4329f70426a"
-      target="_blank">
+      <a
+        className="fixed top-64 right-36 w-80 z-50 cursor-pointer hidden lg:block"
+        href="https://open.spotify.com/playlist/3Tn55g8XnYJVZzQ8K6U9Fg?si=5877f4329f70426a"
+        target="_blank"
+      >
         <section className="relative rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.07)] dark:shadow-[0_4px_20px_rgba(59,130,246,0.1)] dark:hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)]">
           <img
             src={musicImg}

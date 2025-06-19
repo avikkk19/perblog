@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { supabase } from "../lib/supabase";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const AchievementCard = ({ title, imageUrl, link }) => {
   return (
@@ -47,6 +51,27 @@ const AchievementCard = ({ title, imageUrl, link }) => {
 const Achievements = () => {
   const [achievements, setAchievements] = useState([]);
   const [loading, setLoading] = useState(true);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    if (sectionRef.current) {
+      gsap.fromTo(
+        sectionRef.current,
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
+  }, []);
 
   useEffect(() => {
     fetchAchievements();
@@ -65,7 +90,7 @@ const Achievements = () => {
           imagePath: "big4-2.jpg",
           link: "",
         },
-        // add more achievements here in later if had any   
+        // add more achievements here in later if had any
       ];
 
       const achievementsWithUrls = achievementsData.map((achievement) => {
@@ -88,7 +113,7 @@ const Achievements = () => {
 
   if (loading) {
     return (
-      <section className="py-20">
+      <section ref={sectionRef} className="py-20">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">
             Achievements
@@ -107,7 +132,7 @@ const Achievements = () => {
   }
 
   return (
-    <section className="py-20">
+    <section ref={sectionRef} className="py-20">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">
           Achievements

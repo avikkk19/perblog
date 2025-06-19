@@ -6,6 +6,19 @@
   @apply box-border;
   @apply font-mono;
 }
+
+/* Hide default cursor everywhere so only custom cursor is visible */
+html,
+body,
+*,
+a,
+button,
+input,
+textarea,
+select {
+  cursor: none !important;
+}
+
 code {
   white-space: normal;
 }
@@ -19,4 +32,3 @@ code {
 ::selection {
   @apply bg-green-500 text-white;
 }
-

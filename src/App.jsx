@@ -10,10 +10,12 @@ import Footer from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 import BlogList from "./components/Blog";
 import LatestProjects from "./components/LatestProjects";
+import CustomCursor from "./components/CustomCursor";
 
 function App() {
   return (
     <ThemeProvider>
+      <CustomCursor />
       <div className="min-h-screen bg-white dark:bg-[rgb(15,23,42)] transition-colors duration-200">
         <Navbar />
         <Routes>
@@ -46,7 +48,7 @@ function App() {
               </main>
             }
           />
-          
+
           <Route
             path="/photography"
             element={
